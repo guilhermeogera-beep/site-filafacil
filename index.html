@@ -6,6 +6,8 @@
 <meta name="theme-color" content="#1A1A1A" />
 <title>Fila Fácil — fila de espera para restaurantes</title>
 <meta name="description" content="O cliente entra na fila pelo celular, acompanha a posição em tempo real e recebe o aviso quando a mesa fica pronta. Mapa do salão, tela do garçom e relatório inclusos." />
+<link rel="icon" href="./icons/favicon.png" />
+<link rel="apple-touch-icon" href="./icons/icon-180.png" />
 <style>
   :root{
     --ink:#1A1A1A; --bg:#F2F2F0; --card:#fff; --muted:#6E6E68;
@@ -25,7 +27,7 @@
   header{background:var(--ink);color:#fff}
   .topo{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
   .marca{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.15rem}
-  .marca svg{display:block}
+  .marca img{display:block;height:34px;width:auto}
 
   .hero{padding:56px 0 64px;background:var(--ink);color:#fff}
   .hero h1{font-size:2.4rem;line-height:1.15;margin:0 0 16px;letter-spacing:-.5px}
@@ -82,12 +84,7 @@
 <header>
   <div class="wrap topo">
     <div class="marca">
-      <!-- marca do produto: a fila andando -->
-      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
-        <circle cx="6" cy="15" r="3.4" fill="#E8A33D"/>
-        <circle cx="15" cy="15" r="3.4" fill="#ffffff" opacity=".85"/>
-        <circle cx="24" cy="15" r="3.4" fill="#ffffff" opacity=".45"/>
-      </svg>
+      <img src="./icons/simbolo.png" alt="" width="34" height="35" />
       Fila Fácil
     </div>
     <a class="btn btn-p" href="https://wa.me/5519974206363" target="_blank" rel="noopener">Falar no WhatsApp</a>
