@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#1A1A1A" />
+<title>Fila Fácil — fila de espera para restaurantes</title>
+<meta name="description" content="O cliente entra na fila pelo celular, acompanha a posição em tempo real e recebe o aviso quando a mesa fica pronta. Mapa do salão, tela do garçom e relatório inclusos." />
+<style>
+  :root{
+    --ink:#1A1A1A; --bg:#F2F2F0; --card:#fff; --muted:#6E6E68;
+    --line:#DCDCD6; --accent:#E8A33D; --ok:#1E7A52;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.55;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+
+  /* ---- topo ---- */
+  header{background:var(--ink);color:#fff}
+  .topo{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+  .marca{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.15rem}
+  .marca svg{display:block}
+
+  .hero{padding:56px 0 64px;background:var(--ink);color:#fff}
+  .hero h1{font-size:2.4rem;line-height:1.15;margin:0 0 16px;letter-spacing:-.5px}
+  .hero p{font-size:1.15rem;color:#D9D9D4;margin:0 0 28px;max-width:640px}
+  .hero .btns{display:flex;gap:12px;flex-wrap:wrap}
+
+  .btn{display:inline-block;border:0;border-radius:14px;padding:14px 22px;font-size:1rem;
+       font-weight:600;text-decoration:none;cursor:pointer;white-space:nowrap}
+  .btn-p{background:var(--accent);color:#1A1A1A}
+  .btn-g{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45)}
+
+  /* ---- blocos ---- */
+  section{padding:56px 0}
+  section h2{font-size:1.7rem;margin:0 0 8px;letter-spacing:-.3px}
+  section .sub{color:var(--muted);margin:0 0 32px;max-width:620px}
+
+  .passos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .passo{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .passo .n{width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;
+            display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:12px}
+  .passo h3{margin:0 0 6px;font-size:1.05rem}
+  .passo p{margin:0;color:var(--muted);font-size:.96rem}
+
+  .grade{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .item{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .item .ic{font-size:1.5rem;line-height:1;margin-bottom:10px}
+  .item h3{margin:0 0 6px;font-size:1.02rem}
+  .item p{margin:0;color:var(--muted);font-size:.95rem}
+
+  .faixa{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .numeros{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:center}
+  .numeros b{display:block;font-size:1.9rem;letter-spacing:-1px}
+  .numeros span{color:var(--muted);font-size:.95rem}
+
+  .lista{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+  .lista li{padding-left:28px;position:relative;color:var(--muted)}
+  .lista li::before{content:"\2713";position:absolute;left:0;color:var(--ok);font-weight:700}
+
+  .cta{background:var(--ink);color:#fff;text-align:center}
+  .cta h2{font-size:1.9rem;margin:0 0 10px}
+  .cta p{color:#D9D9D4;margin:0 0 26px}
+
+  footer{padding:28px 0;color:var(--muted);font-size:.9rem;text-align:center}
+
+  @media (max-width:860px){
+    .hero h1{font-size:1.9rem}
+    .passos,.grade,.numeros{grid-template-columns:1fr}
+    section{padding:40px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap topo">
+    <div class="marca">
+      <!-- marca do produto: a fila andando -->
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+        <circle cx="6" cy="15" r="3.4" fill="#E8A33D"/>
+        <circle cx="15" cy="15" r="3.4" fill="#ffffff" opacity=".85"/>
+        <circle cx="24" cy="15" r="3.4" fill="#ffffff" opacity=".45"/>
+      </svg>
+      Fila Fácil
+    </div>
+    <a class="btn btn-p" href="https://wa.me/5519974206363" target="_blank" rel="noopener">Falar no WhatsApp</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>A fila do seu restaurante,<br />sem papel e sem gritaria.</h1>
+    <p>O cliente entra na fila pelo tablet do balcão ou pelo próprio celular, acompanha a
+       posição em tempo real e recebe o aviso quando a mesa fica pronta. A recepção enxerga
+       o salão inteiro numa tela só.</p>
+    <div class="btns">
+      <a class="btn btn-p" href="https://wa.me/5519974206363" target="_blank" rel="noopener">Quero ver funcionando</a>
+      <a class="btn btn-g" href="#como">Como funciona</a>
+    </div>
+  </div>
+</div>
+
+<section id="como">
+  <div class="wrap">
+    <h2>Como funciona</h2>
+    <p class="sub">Do lado do cliente são três toques. Do lado da casa, ninguém precisa
+       aprender programa nenhum: quem sabe usar celular sabe usar isto.</p>
+    <div class="passos">
+      <div class="passo">
+        <div class="n">1</div>
+        <h3>Entra na fila</h3>
+        <p>Nome, telefone e quantas pessoas — no tablet do balcão ou lendo o QR Code com o
+           próprio celular. Idoso, gestante e criança de colo entram na fila preferencial.</p>
+      </div>
+      <div class="passo">
+        <div class="n">2</div>
+        <h3>Acompanha de onde estiver</h3>
+        <p>O cliente recebe um link e vê a própria posição atualizando sozinha, sem ficar
+           preso na porta perguntando quanto falta.</p>
+      </div>
+      <div class="passo">
+        <div class="n">3</div>
+        <h3>É chamado quando a mesa fica pronta</h3>
+        <p>O garçom lança a mesa que vagou, o sistema aponta quem é o próximo pelo tamanho
+           do grupo e avisa por WhatsApp, painel ou pager.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="faixa">
+  <section>
+    <div class="wrap numeros">
+      <div><b>Zero papel</b><span>acabou a lista na prancheta e o nome apagado</span></div>
+      <div><b>Uma tela</b><span>fila, mesas e salão no mesmo lugar</span></div>
+      <div><b>Sem baixar app</b><span>o cliente abre um link e pronto</span></div>
+    </div>
+  </section>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>O que vem junto</h2>
+    <p class="sub">Não é só uma lista de nomes: é a operação do salão inteiro.</p>
+    <div class="grade">
+      <div class="item">
+        <div class="ic">🗺️</div>
+        <h3>Mapa do salão</h3>
+        <p>As mesas na planta da casa: livre, ocupada, precisa limpar, juntar duas mesas —
+           com o tempo que cada grupo está sentado.</p>
+      </div>
+      <div class="item">
+        <div class="ic">🧑‍🍳</div>
+        <h3>Tela do garçom</h3>
+        <p>Ele lança a mesa que vagou direto do celular e a recepção já sabe. Sem rádio,
+           sem ir até a porta avisar.</p>
+      </div>
+      <div class="item">
+        <div class="ic">💬</div>
+        <h3>Aviso por WhatsApp</h3>
+        <p>Um toque abre a mensagem pronta com o nome do cliente. Sem custo por mensagem.</p>
+      </div>
+      <div class="item">
+        <div class="ic">🎟️</div>
+        <h3>Fila da fila</h3>
+        <p>Casa lotada? O cliente entra numa antessala e é chamado quando abre vaga na
+           fila de verdade.</p>
+      </div>
+      <div class="item">
+        <div class="ic">📊</div>
+        <h3>Relatório</h3>
+        <p>Quantos vieram, quanto esperaram, quantos desistiram e em que horário. Para o
+           dono decidir com número, não com sensação.</p>
+      </div>
+      <div class="item">
+        <div class="ic">🔔</div>
+        <h3>Pager de rádio</h3>
+        <p>Para quem prefere o aparelhinho na mão do cliente: funciona junto, sem depender
+           do sinal de celular.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="faixa">
+  <section>
+    <div class="wrap">
+      <h2>Com a cara da sua casa</h2>
+      <p class="sub">O sistema é o mesmo; a marca é a sua.</p>
+      <ul class="lista">
+        <li>Seu logo, suas cores e o nome do restaurante em todas as telas — inclusive na que o cliente abre no celular.</li>
+        <li>Endereço próprio e o ícone da casa no tablet, como se o sistema tivesse sido feito só para ela.</li>
+        <li>As regras da fila do seu jeito: tamanho das mesas, prazo para comparecer, preferencial, área pet, texto do termo.</li>
+        <li>Funciona em tablet, celular e computador. Nada para instalar em servidor.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<div class="cta">
+  <section>
+    <div class="wrap">
+      <h2>Quer ver rodando no seu salão?</h2>
+      <p>Uma demonstração de 20 minutos, com a fila da sua casa.</p>
+      <a class="btn btn-p" href="https://wa.me/5519974206363" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    Fila Fácil — filafacilapp.com.br · <a href="mailto:guilhermeogera@gmail.com">guilhermeogera@gmail.com</a>
+  </div>
+</footer>
+
+</body>
+</html>

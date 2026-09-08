@@ -1,0 +1,29 @@
+=====================================================================
+ SITE DE VENDA — filafacilapp.com.br
+=====================================================================
+ Esta pasta NÃO faz parte do app. É a página que apresenta o produto,
+ e vai para um repositório SEPARADO no GitHub.
+
+ Por que separado: o GitHub Pages aceita UM domínio por repositório.
+ O repositório do app já usa o domínio de um cliente; o endereço
+ principal (filafacilapp.com.br) precisa do seu.
+
+ ANTES: o repositório do APP precisa ter soltado o filafacilapp.com.br
+ (o arquivo CNAME dele já está com aveiro.filafacilapp.com.br). O mesmo
+ domínio não pode estar em dois repositórios ao mesmo tempo.
+
+ COMO PUBLICAR (uma vez só):
+  1. GitHub -> New repository -> nome: site-filafacil (público).
+  2. Suba os DOIS arquivos desta pasta: index.html e CNAME.
+  3. Settings -> Pages -> Source: Deploy from a branch -> main / (root).
+  4. Custom domain: filafacilapp.com.br -> Save.
+  5. Espere o DNS Check passar e marque "Enforce HTTPS".
+
+ CONTATO NA PÁGINA (já preenchido):
+   WhatsApp: https://wa.me/5519974206363   (55 19 97420-6363)
+   E-mail:   guilhermeogera@gmail.com
+ Aparece em três botões e no rodapé. Para trocar, procure "wa.me" e
+ "mailto" no index.html.
+
+ O DNS já está pronto: o "vazio" (raiz) e o "www" apontam para o
+ GitHub. Não precisa mexer no Registro.br para esta página.
