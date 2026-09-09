@@ -14,7 +14,7 @@
 
  COMO PUBLICAR (uma vez só):
   1. GitHub -> New repository -> nome: site-filafacil (público).
-  2. Suba os DOIS arquivos desta pasta: index.html e CNAME.
+  2. Suba tudo o que está nesta pasta: index.html, CNAME e a pasta icons/.
   3. Settings -> Pages -> Source: Deploy from a branch -> main / (root).
   4. Custom domain: filafacilapp.com.br -> Save.
   5. Espere o DNS Check passar e marque "Enforce HTTPS".
@@ -27,3 +27,14 @@
 
  O DNS já está pronto: o "vazio" (raiz) e o "www" apontam para o
  GitHub. Não precisa mexer no Registro.br para esta página.
+
+ AS TELAS DA PÁGINA NÃO SÃO FOTOS
+ Elas são o CSS do próprio sistema, refeito à mão. Sai mais leve que
+ imagem, fica nítido em qualquer tela e não envelhece junto com um
+ print antigo. O preço: se a cara do sistema mudar, esta página
+ precisa ser atualizada junto (procure "AS TELAS" no index.html).
+
+ O QUE APARECE NO WHATSAPP
+ As linhas og:title / og:description / og:image do topo do arquivo são
+ o cartãozinho que o WhatsApp e as redes montam quando alguém manda o
+ link. Mudou o texto de venda? Mude ali também.

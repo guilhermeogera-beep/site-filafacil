@@ -3,15 +3,39 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fila Fácil — a fila do seu restaurante, sem papel e sem gritaria</title>
+<meta name="description" content="O cliente entra na fila pelo celular e acompanha a posição em tempo real. A recepção chama a mesa certa, o garçom lança a mesa que vagou, e no fim do dia você sabe quantos foram embora." />
 <meta name="theme-color" content="#1A1A1A" />
-<title>Fila Fácil — fila de espera para restaurantes</title>
-<meta name="description" content="O cliente entra na fila pelo celular, acompanha a posição em tempo real e recebe o aviso quando a mesa fica pronta. Mapa do salão, tela do garçom e relatório inclusos." />
+
+<!-- Redes sociais: é o que aparece quando alguém manda o link no WhatsApp -->
+<meta property="og:title" content="Fila Fácil — a fila do seu restaurante, sem papel e sem gritaria" />
+<meta property="og:description" content="O cliente entra pelo celular e vê a própria posição. A recepção enxerga fila e salão numa tela só." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://filafacilapp.com.br/" />
+<meta property="og:image" content="https://filafacilapp.com.br/icons/icon-180.png" />
+
 <link rel="icon" href="./icons/favicon.png" />
 <link rel="apple-touch-icon" href="./icons/icon-180.png" />
 <style>
+/* ============================================================
+   FILA FÁCIL — SITE DE VENDAS
+   ============================================================
+   Uma página só, sem build e sem biblioteca — as mesmas regras
+   do sistema: abre em qualquer lugar, funciona com internet
+   ruim, e dá para mexer com um editor de texto.
+
+   QUEM LÊ ISTO É O DONO DO RESTAURANTE, no celular, no meio do
+   expediente. Por isso: frase curta, cena antes de recurso, e o
+   botão de WhatsApp sempre à mão.
+
+   As telas mostradas aqui NÃO são fotos: são o CSS do próprio
+   sistema, refeito à mão. Fica nítido em qualquer tela e não
+   envelhece junto com um print antigo — mas, se a cara do
+   sistema mudar, esta página precisa ser atualizada junto.
+   ============================================================ */
   :root{
     --ink:#1A1A1A; --bg:#F2F2F0; --card:#fff; --muted:#6E6E68;
-    --line:#DCDCD6; --accent:#E8A33D; --ok:#1E7A52;
+    --line:#DCDCD6; --accent:#E8A33D; --ok:#1E7A52; --pref:#6B5BA8;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -24,13 +48,13 @@
   a{color:inherit}
 
   /* ---- topo ---- */
-  header{background:var(--ink);color:#fff}
-  .topo{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+  header{background:var(--ink);color:#fff;position:sticky;top:0;z-index:5}
+  .topo{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
   .marca{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.15rem}
   .marca img{display:block;height:34px;width:auto}
 
   .hero{padding:56px 0 64px;background:var(--ink);color:#fff}
-  .hero h1{font-size:2.4rem;line-height:1.15;margin:0 0 16px;letter-spacing:-.5px}
+  .hero h1{font-size:2.4rem;line-height:1.15;margin:0 0 16px;letter-spacing:-.5px;max-width:820px}
   .hero p{font-size:1.15rem;color:#D9D9D4;margin:0 0 28px;max-width:640px}
   .hero .btns{display:flex;gap:12px;flex-wrap:wrap}
 
@@ -43,6 +67,12 @@
   section{padding:56px 0}
   section h2{font-size:1.7rem;margin:0 0 8px;letter-spacing:-.3px}
   section .sub{color:var(--muted);margin:0 0 32px;max-width:620px}
+  .faixa{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+  /* ---- a dor (vem antes do produto: o dono precisa se ver na cena) ---- */
+  .dor-lista{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:26px}
+  .dor-item{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:20px;color:var(--muted)}
+  .dor-item b{display:block;color:var(--ink);font-size:1.05rem;margin-bottom:6px}
 
   .passos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .passo{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
@@ -57,7 +87,6 @@
   .item h3{margin:0 0 6px;font-size:1.02rem}
   .item p{margin:0;color:var(--muted);font-size:.95rem}
 
-  .faixa{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .numeros{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:center}
   .numeros b{display:block;font-size:1.9rem;letter-spacing:-1px}
   .numeros span{color:var(--muted);font-size:.95rem}
@@ -65,6 +94,47 @@
   .lista{list-style:none;padding:0;margin:0;display:grid;gap:10px}
   .lista li{padding-left:28px;position:relative;color:var(--muted)}
   .lista li::before{content:"\2713";position:absolute;left:0;color:var(--ok);font-weight:700}
+
+  /* ============================================================
+     AS TELAS — desenhadas com o CSS do próprio sistema
+     ============================================================ */
+  .telas{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start;margin-top:26px}
+  .tela{background:var(--bg);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .tela-topo{background:var(--ink);color:#fff;padding:10px 14px;display:flex;
+             align-items:center;justify-content:space-between;gap:10px;font-size:.9rem}
+  .tela-topo b{font-weight:700}
+  .tela-selo{background:rgba(255,255,255,.14);border-radius:999px;padding:3px 10px;font-size:.78rem}
+  .tela-corpo{padding:14px;display:grid;gap:10px}
+  .tela-nota{margin:10px 0 0;color:var(--muted);font-size:.9rem}
+
+  /* cartão de quem espera, igual ao da tela da atendente */
+  .fila-cartao{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--line);
+               border-radius:12px;padding:11px 13px;display:flex;justify-content:space-between;
+               align-items:center;gap:12px}
+  .fila-cartao.chamando{border-left-color:var(--accent);box-shadow:0 0 0 2px rgba(232,163,61,.25)}
+  .fila-cartao.preferencial{border-left-color:var(--pref)}
+  .fc-nome{font-weight:700}
+  .fc-linha{color:var(--muted);font-size:.85rem;margin-top:2px}
+  .fc-dir{text-align:right;font-size:.8rem;color:var(--muted);white-space:nowrap}
+  .selo{display:inline-block;font-size:.72rem;border-radius:999px;padding:2px 8px;margin-right:4px}
+  .selo-pref{background:#ECEAF4;color:#4B3E80}
+  .selo-pet{background:#EDEDEA;color:#4a4a45}
+  .mini{display:inline-block;background:var(--ink);color:#fff;border-radius:9px;
+        padding:6px 12px;font-size:.8rem;font-weight:600}
+  .mini-a{background:var(--accent);color:#1A1A1A}
+
+  /* celular do cliente */
+  .fone{background:var(--ink);border-radius:26px;padding:12px;box-shadow:0 18px 40px rgba(0,0,0,.18)}
+  .fone-tela{background:var(--bg);border-radius:16px;overflow:hidden}
+  .fone-topo{background:var(--ink);color:#fff;padding:9px 12px;font-size:.8rem;
+             display:flex;justify-content:space-between;align-items:center}
+  .fone-corpo{padding:14px;display:grid;gap:12px;text-align:center}
+  .posicao{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .posicao .n{font-size:2.6rem;font-weight:800;letter-spacing:-2px;line-height:1}
+  .posicao small{display:block;color:var(--muted);font-size:.85rem}
+  .posicao small + small{font-size:.78rem;margin-top:4px}
+  .aviso{background:var(--accent);color:#1A1A1A;border-radius:14px;padding:14px;font-weight:700}
+  .fone-rot{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.6px;margin-bottom:-6px}
 
   .cta{background:var(--ink);color:#fff;text-align:center}
   .cta h2{font-size:1.9rem;margin:0 0 10px}
@@ -74,7 +144,9 @@
 
   @media (max-width:860px){
     .hero h1{font-size:1.9rem}
-    .passos,.grade,.numeros{grid-template-columns:1fr}
+    .passos,.grade,.numeros,.dor-lista{grid-template-columns:1fr}
+    .telas{grid-template-columns:1fr}
+    .fone{max-width:340px;margin:0 auto}
     section{padding:40px 0}
   }
 </style>
@@ -94,15 +166,50 @@
 <div class="hero">
   <div class="wrap">
     <h1>A fila do seu restaurante,<br />sem papel e sem gritaria.</h1>
-    <p>O cliente entra na fila pelo tablet do balcão ou pelo próprio celular, acompanha a
-       posição em tempo real e recebe o aviso quando a mesa fica pronta. A recepção enxerga
-       o salão inteiro numa tela só.</p>
+    <p>O cliente entra na fila pelo celular e acompanha a posição de onde estiver.
+       A recepção enxerga a fila e o salão na mesma tela, e chama a mesa certa
+       para o grupo certo.</p>
     <div class="btns">
       <a class="btn btn-p" href="https://wa.me/5519974206363" target="_blank" rel="noopener">Quero ver funcionando</a>
-      <a class="btn btn-g" href="#como">Como funciona</a>
+      <a class="btn btn-g" href="#telas">Ver as telas</a>
     </div>
   </div>
 </div>
+
+<!-- ============================================================
+     A DOR — o dono precisa se ver na cena antes de querer saber
+     do produto. Tudo aqui é coisa que acontece num sábado cheio.
+     ============================================================ -->
+<section class="faixa">
+  <div class="wrap">
+    <h2>Você conhece essas cenas</h2>
+    <p class="sub">Elas custam mesa vazia e cliente perdido todo fim de semana — e ninguém
+       consegue medir quanto.</p>
+
+    <div class="dor-lista">
+      <div class="dor-item">
+        <b>A lista na prancheta</b>
+        Nome escrito na correria, rasurado, apagado. Na hora de chamar, ninguém tem certeza
+        de quem vinha antes de quem.
+      </div>
+      <div class="dor-item">
+        <b>"Falta muito?"</b>
+        A cada cinco minutos alguém volta na porta para perguntar. E a recepcionista para
+        o que estava fazendo para responder um chute.
+      </div>
+      <div class="dor-item">
+        <b>A mesa vaga que ninguém viu</b>
+        O garçom limpou e seguiu para outro canto do salão. A mesa fica dez minutos parada
+        com trinta pessoas esperando lá fora.
+      </div>
+      <div class="dor-item">
+        <b>O grupo que desistiu em silêncio</b>
+        Foi embora sem avisar. Você chama três vezes, perde a vez de quem estava esperando,
+        e no fim do dia não sabe quantos fizeram isso.
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="como">
   <div class="wrap">
@@ -119,8 +226,8 @@
       <div class="passo">
         <div class="n">2</div>
         <h3>Acompanha de onde estiver</h3>
-        <p>O cliente recebe um link e vê a própria posição atualizando sozinha, sem ficar
-           preso na porta perguntando quanto falta.</p>
+        <p>O cliente recebe um link e vê a própria posição atualizando sozinha. Pode dar
+           uma volta no shopping sem medo de perder a vez.</p>
       </div>
       <div class="passo">
         <div class="n">3</div>
@@ -132,15 +239,92 @@
   </div>
 </section>
 
-<div class="faixa">
-  <section>
-    <div class="wrap numeros">
-      <div><b>Zero papel</b><span>acabou a lista na prancheta e o nome apagado</span></div>
-      <div><b>Uma tela</b><span>fila, mesas e salão no mesmo lugar</span></div>
-      <div><b>Sem baixar app</b><span>o cliente abre um link e pronto</span></div>
+<!-- ============================================================
+     AS TELAS — recriadas em CSS (veja a nota no topo do arquivo)
+     ============================================================ -->
+<section id="telas" class="faixa">
+  <div class="wrap">
+    <h2>As duas telas que importam</h2>
+    <p class="sub">Uma fica no balcão, com a recepção. A outra vai no bolso do cliente.
+       O resto do sistema existe para essas duas conversarem.</p>
+
+    <div class="telas">
+
+      <!-- tela do balcão -->
+      <div class="tela">
+        <div class="tela-topo">
+          <b>Fila de espera</b>
+          <span class="tela-selo">28 pessoas · 9 grupos</span>
+        </div>
+        <div class="tela-corpo">
+          <div class="fila-cartao chamando">
+            <div>
+              <div class="fc-nome">Marcos</div>
+              <div class="fc-linha">4 pessoas · mesa 12 pronta</div>
+            </div>
+            <div class="fc-dir"><span class="mini mini-a">Chamando</span><br />2 min</div>
+          </div>
+          <div class="fila-cartao preferencial">
+            <div>
+              <div class="fc-nome">Dona Helena</div>
+              <div class="fc-linha">
+                <span class="selo selo-pref">★ Preferencial</span>
+                <span class="selo selo-pet">🐾 Com pet</span>
+              </div>
+            </div>
+            <div class="fc-dir"><span class="mini">Chamar</span><br />esperando 9 min</div>
+          </div>
+          <div class="fila-cartao">
+            <div>
+              <div class="fc-nome">Juliana</div>
+              <div class="fc-linha">2 pessoas</div>
+            </div>
+            <div class="fc-dir"><span class="mini">Chamar</span><br />esperando 14 min</div>
+          </div>
+          <div class="fila-cartao">
+            <div>
+              <div class="fc-nome">Família Souza</div>
+              <div class="fc-linha">8 pessoas · mesa grande</div>
+            </div>
+            <div class="fc-dir"><span class="mini">Chamar</span><br />esperando 21 min</div>
+          </div>
+        </div>
+        <p class="tela-nota" style="padding:0 14px 14px">
+          A recepção não escolhe de cabeça: o sistema já separa preferencial, grupo grande
+          e mesa compatível. Ela só confirma.
+        </p>
+      </div>
+
+      <!-- celular do cliente -->
+      <div>
+        <div class="fone">
+          <div class="fone-tela">
+            <div class="fone-topo">
+              <span>Sua vez na fila</span>
+              <span>● ao vivo</span>
+            </div>
+            <div class="fone-corpo">
+              <!-- os dois momentos da mesma tela: nunca aparecem juntos -->
+              <div class="fone-rot">enquanto espera</div>
+              <div class="posicao">
+                <div class="n">3º</div>
+                <small>na fila, 4 pessoas</small>
+                <small>espera média hoje: 18 min</small>
+              </div>
+              <div class="fone-rot">quando a mesa fica pronta</div>
+              <div class="aviso">🍽️ Chegou a sua vez!<br />Procure a recepção</div>
+            </div>
+          </div>
+        </div>
+        <p class="tela-nota">
+          Sem baixar aplicativo: é um link. Enquanto ele espera, a posição muda sozinha
+          na tela dele.
+        </p>
+      </div>
+
     </div>
-  </section>
-</div>
+  </div>
+</section>
 
 <section>
   <div class="wrap">
@@ -188,18 +372,50 @@
 
 <div class="faixa">
   <section>
-    <div class="wrap">
-      <h2>Com a cara da sua casa</h2>
-      <p class="sub">O sistema é o mesmo; a marca é a sua.</p>
-      <ul class="lista">
-        <li>Seu logo, suas cores e o nome do restaurante em todas as telas — inclusive na que o cliente abre no celular.</li>
-        <li>Endereço próprio e o ícone da casa no tablet, como se o sistema tivesse sido feito só para ela.</li>
-        <li>As regras da fila do seu jeito: tamanho das mesas, prazo para comparecer, preferencial, área pet, texto do termo.</li>
-        <li>Funciona em tablet, celular e computador. Nada para instalar em servidor.</li>
-      </ul>
+    <div class="wrap numeros">
+      <div><b>Zero papel</b><span>acabou a lista na prancheta e o nome apagado</span></div>
+      <div><b>Uma tela</b><span>fila, mesas e salão no mesmo lugar</span></div>
+      <div><b>Sem baixar app</b><span>o cliente abre um link e pronto</span></div>
     </div>
   </section>
 </div>
+
+<section>
+  <div class="wrap">
+    <h2>Com a cara da sua casa</h2>
+    <p class="sub">O sistema é o mesmo; a marca é a sua.</p>
+    <ul class="lista">
+      <li>Seu logo, suas cores e o nome do restaurante em todas as telas — inclusive na que o cliente abre no celular.</li>
+      <li>Endereço próprio e o ícone da casa no tablet, como se o sistema tivesse sido feito só para ela.</li>
+      <li>As regras da fila do seu jeito: tamanho das mesas, prazo para comparecer, preferencial, área pet, texto do termo.</li>
+      <li>Funciona em tablet, celular e computador. Nada para instalar em servidor.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="faixa">
+  <div class="wrap">
+    <h2>Feito para casa que enche</h2>
+    <p class="sub">Se no sábado à noite tem gente esperando na calçada, é para você.</p>
+    <div class="grade">
+      <div class="item">
+        <h3>Restaurante de fim de semana</h3>
+        <p>Fila de 40, 60 pessoas, grupos de tamanhos diferentes e mesa que precisa ser
+           juntada na hora.</p>
+      </div>
+      <div class="item">
+        <h3>Casa de shopping</h3>
+        <p>O cliente quer dar uma volta enquanto espera — e voltar na hora certa, sem
+           perder a vez.</p>
+      </div>
+      <div class="item">
+        <h3>Rodízio e churrascaria</h3>
+        <p>Mesa grande, rotatividade alta e recepção que precisa saber, em um olhar, o que
+           já está pronto.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <div class="cta">
   <section>
